@@ -17,8 +17,10 @@
     <div class="span12">
       <%= form_tag demo_path, :method => 'get' do %>
         <p>
-          <%= text_field_tag :start, params[:start] %>
-          <%= text_field_tag :finish, params[:finish] %>
+          <%= text_field_tag :start, params[:start], :placeholder => 'start' %>
+          <%= text_field_tag :finish, params[:finish], :placeholder => 'finish' %>
+          <%= text_field_tag :search, params[:search], :placeholder => 'search by...' %>
+          <%= text_field_tag :filter_type, params[:filter_type], :placeholder => 'group by...' %>
           <%= submit_tag "Search", :name => nil %>
         </p>
       <% end %>
@@ -26,7 +28,9 @@
 
     <div class="row-fluid">
       <div class="span4">
-      <table class="table table-striped table-hover table-condensed">
+        <%= paginate @find_info %>
+        <div id = "results">
+               <table class="table table-striped table-hover table-condensed">
         <thead>
           <tr>
             <th>ID</th>
@@ -48,6 +52,12 @@
         <% end %>
         </tbody>
       </table>
+        </div>
+        <%= page_entries_info @find_info %>
+      </div>
+
+      <div class="span6">
+        <%= column_chart(@chart_info) %>
       </div>
     </div>
   </div>

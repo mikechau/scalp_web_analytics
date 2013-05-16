@@ -4,4 +4,5 @@ class Rbandit::Instropt < Rbandit::TradeBase
   has_many :trdstatsopt, :foreign_key => :optid
   has_many :trdopts, :foreign_key => :optid
   has_many :opnintopts, :foreign_key => :optid
+  has_many :volstatsopts, :foreign_key => :optid
 end
