@@ -1,35 +1,37 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Scalp Trade: Web Analytics</title>
-    <%= stylesheet_link_tag    "application", :media => "all" %>
-    <%= javascript_include_tag "application" %>
-    <%= csrf_meta_tags %>
-  </head>
+<head>
+  <title>Scalp Trade: Web Analytics</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
 
-  <body>
-    <header class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-inner">
-          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <%= link_to "ANALYTICS", '#', id: "logo" %>
-          <div class="nav-collapse collapse">
-            <p class="navbar-text pull-right">
-              Logged in as #user.
-            </p>
-            <ul class="nav">
-              <li><%= link_to "Home",    '#', id: "active" %></li>
-              <li><%= link_to "Help",    '#' %></li>
-              <li><%= link_to "Sign in", '#' %></li>
-            </ul>
-          </div><!-- /nav-collapse collapse -->
-      </div><!-- /navbar-inner -->
-    </header>
+<body>
+<header class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar-inner">
+      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to "ANALYTICS", '#', id: "logo" %>
+      <div class="nav-collapse collapse">
+        <p class="navbar-text pull-right">
+          Logged in as #user.
+        </p>
+        <ul class="nav">
+          <li><%= link_to "Home",    '#', id: "active" %></li>
+          <li><%= link_to "Help",    '#' %></li>
+          <li><%= link_to "Sign in", '#' %></li>
+        </ul>
+      </div><!-- /nav-collapse collapse -->
+  </div><!-- /navbar-inner -->
+</header>
+  
+<div class="container-fluid">
+<%= yield %>
+</div>
 
-    <%= yield %>
-
-  </body>
+</body>
 </html>
