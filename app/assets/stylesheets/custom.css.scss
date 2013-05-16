@@ -1,0 +1,27 @@
+@import "bootstrap";
+@import "bootstrap-responsive";
+
+#logo {
+  float: left;
+  margin-right: 10px;
+  font-size: 1.7em;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  padding-top: 9px;
+  font-weight: bold;
+  line-height: 1;
+}
+
+/* body */
+
+body {
+  padding-top: 60px;
+}
+
+
+/* Overrides */
+
+.table-hover tbody tr:hover > td, .table-hover tbody tr:hover {
+  background-color: #D2DEE8;
+}
