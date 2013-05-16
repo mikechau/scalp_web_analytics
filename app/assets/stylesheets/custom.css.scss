@@ -4,6 +4,7 @@
 #logo {
   float: left;
   margin-right: 10px;
+  margin-left: 10px;
   font-size: 1.7em;
   color: #fff;
   text-transform: uppercase;
@@ -13,10 +14,11 @@
   line-height: 1;
 }
 
-/* body */
+// /* body */
 
 body {
   padding-top: 60px;
+  padding-bottom: 40px;
 }
 
 
@@ -24,4 +26,13 @@ body {
 
 .table-hover tbody tr:hover > td, .table-hover tbody tr:hover {
   background-color: #D2DEE8;
+}
+
+.navigation_bar {
+}
+
+@media (max-width: 979px) {
+  body {
+    padding-top: 0px;
+  }
 }
