@@ -37,4 +37,8 @@ gem 'jquery-rails'
 # To use debugger
 # gem 'debugger'
 
+gem 'safe_attributes', :require => 'safe_attributes/base'
 gem 'chartkick'
+gem 'thin'
+gem 'httparty'
+gem 'rufus-scheduler'
