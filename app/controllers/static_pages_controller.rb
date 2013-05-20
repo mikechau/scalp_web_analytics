@@ -6,14 +6,13 @@ class StaticPagesController < ApplicationController
   end
 
   def demo3
-    @indicator_names = Rbandit::Trdindopt.all
     if params[:start_date] && params[:end_date] && params[:group_type] != ''
-      case params[:group_type]
-      when "ind" 
-        @indicators = Data::Indicator.new(params[:start_date], params[:end_date], @indicator_names)
-        @indicators.execute
-      end
-      
+
+      @results = Data::Indicator.new(params[:start_date], params[:end_date], params[:group_type])
+      @results.execute
+
+      @results.table = Kaminari.paginate_array(@results.table).page(params[:page]).per(15)
+
       respond_to do |format|
         format.html
         format.json { render json: @indicators }
