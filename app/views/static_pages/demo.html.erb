@@ -14,9 +14,9 @@
   </div>
 
   <div class="row-fluid">
-
+    <%= demo_path %>
     <div class="span12">
-      <%= form_tag demo_path, :method => 'get' do %>
+      <%= form_tag demo2_path, :method => 'get' do %>
         <p>
           <%= text_field_tag :start, params[:start], :placeholder => 'start' %>
           <%= text_field_tag :finish, params[:finish], :placeholder => 'finish' %>
@@ -25,6 +25,7 @@
           <%= submit_tag "Search", :name => nil %>
         </p>
       <% end %>
+
     </div>
 
     <div class="row-fluid">
@@ -84,13 +85,10 @@ $(function() {
       series : [{
         type : 'candlestick',
         name : 'AAPL Stock Price',
-        data : [[1268489600000,0.5562, 0.9462,0.2762,0.5662],<% Rbandit::Instropt.last.volstatsopts.each do |r| %>
+        data : [<% Rbandit::Instropt.find(816496).volstatsopts.each do |r| %>
                   [<%= r.ds.strftime('%s%3N') %>,<%= r[:open].to_f %>,<%= r[:high].to_f %>,<%= r[:low].to_f %>,<%= r[:last].to_f %>],
                 <% end %>
-                [168489600000,0.2662, 0.3462,0.3762,0.4662],
-                [1368489700000,0.2662, 0.3462,0.3762,0.4662],
-                [1368489800000,0.2662, 0.3462,0.3762,0.4662],
-                [1368489900000,0.2662, 0.3462,0.3762,0.4662]
+                [1368799373650,0.2662, 0.3462,0.3762,0.4662]
         ],
         dataGrouping : {
           units : [
