@@ -11,7 +11,10 @@ class StaticPagesController < ApplicationController
       @results = Data::Indicator.new(params[:start_date], params[:end_date], params[:group_type])
       @results.execute
 
-      @results.table = Kaminari.paginate_array(@results.table).page(params[:page]).per(15)
+      @results.table = Kaminari.paginate_array(@results.table).page(params[:page]).per(20)
+
+      @results_cats = @results.table[0..5].map { |r| r[0] }
+      @results_dats = @results.table[0..5].map { |r| r[1] }
 
       respond_to do |format|
         format.html

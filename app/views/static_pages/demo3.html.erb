@@ -1,7 +1,7 @@
 <%= javascript_include_tag "http://code.highcharts.com/stock/highstock.js" %>
 <div class="row fluid">
   <div class="span8">
-    <div id="container" style="height:540px"></div>
+    <div id="container" style="height:555px"></div>
   </div>
 
   <div class="span4">
@@ -41,7 +41,7 @@ $(function () {
                 text: 'Source: Rbandits::Trdopt'
             },
             xAxis: {
-                categories: <%= raw @results.cats[0..5] %>,
+                categories: <%= raw @results_cats %>,
                 title: {
                     text: null
                 }
@@ -87,7 +87,7 @@ $(function () {
             credits: {
                 enabled: false
             },
-            series: [{ name: "Instruments", data: <%= raw @results.dats[0..5] %>}]
+            series: [{ name: "Instruments", data: <%= raw @results_dats %>}]
         });
     });
 </script>
