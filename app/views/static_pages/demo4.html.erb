@@ -1,0 +1,128 @@
+<%= form_tag demo4_path, :method => 'get', :class => 'well form-horizontal' do %>
+  <div class="control-group">
+    <%= label_tag(:start_date, "Start Date", :class => 'control-label') %>
+    <div class="controls">
+      <%= text_field_tag :start_date, params[:start_date], :placeholder => 'Starting Date...', :value => Time.now.strftime('%Y-%m-%d 09:30:00'), :class => "time_input" %>
+    </div><!-- /controls -->
+  </div><!--/control-group-->
+  
+  <div class="control-group">
+    <%= label_tag(:end_date, "End Date", :class => 'control-label') %>
+    <div class="controls">
+      <%= text_field_tag :end_date, params[:end_date], :placeholder => 'Ending Date...', :value => Time.now.strftime('%Y-%m-%d 23:59:59'), :class => "time_input" %>
+    </div><!-- /controls -->
+  </div><!-- /control-group -->
+
+  <div class="control-group">
+    <%= label_tag(:group_type, "Group By", :class => 'control-label') %>
+    <div class="controls">
+      <%= select_tag(:group_type, options_for_select({"Underlying" => 'underlying'}), :prompt => 'Select 1') %>
+      <br /><br />
+      <%= submit_tag "Search", :class => 'btn btn-primary', :name => nil %>
+    </div><!--/controls -->
+  </div><!-- /control-group -->
+<% end %>
+
+ <script>
+  $('.time_input').datetimepicker({
+    controlType: 'select',
+    dateFormat: "yy-mm-dd",
+    timeFormat: 'HH:mm:ss'
+  });
+</script>
+
+<% if @results != nil %>
+
+<%= javascript_include_tag "http://code.highcharts.com/stock/highstock.js" %>
+<div class="row fluid">
+  <div class="span8">
+    <div id="container" style="height:555px"></div>
+  </div>
+
+  <div class="span4">
+    <%= paginate @results %>
+      <table class="table table-striped table-hover table-condensed">
+        <thead>
+          <tr>
+            <th><%= params[:group_type] %></th>
+            <th>Total</th>
+          </tr>
+       </thead>
+       <tbody>
+        <% @results.each do |record| %>
+        <tr>
+          <td><%= record[0] %></td>
+          <td><%= record[1] %></td>
+        </tr>
+        <% end %>
+        </tbody>
+      </table>
+    <%= page_entries_info @results %>
+  </div>
+</div>
+
+<script>
+$(function () {
+        $('#container').highcharts({
+            chart: {
+                type: 'bar'
+            },
+            title: {
+                text: 'Leading Indicators'
+            },
+            subtitle: {
+                text: 'Source: Rbandits::Trdopt'
+            },
+            xAxis: {
+                categories: <%= raw @results_cats %>,
+                title: {
+                    text: null
+                }
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Total',
+                    align: 'high'
+                },
+                labels: {
+                    overflow: 'justify'
+                }
+            },
+            plotOptions: {
+                bar: {
+                    dataLabels: {
+                        enabled: true,
+                        style: {
+                          color: 'black'
+                        }
+                    }
+                },
+                series: {
+                  //stacking: 'normal',
+                  borderWidth: 1,
+                  pointPadding: 0,
+                  groupPadding: 0
+                }
+            },
+            legend: {
+                enabled: false,
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top',
+                x: -100,
+                y: 100,
+                floating: true,
+                borderWidth: 1,
+                backgroundColor: '#FFFFFF',
+                shadow: true
+            },
+            credits: {
+                enabled: false
+            },
+            series: [{ name: "Instruments", data: <%= raw @results_dats %>}]
+        });
+    });
+</script>
+
+<% end %>

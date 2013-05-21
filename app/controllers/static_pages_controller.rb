@@ -27,4 +27,21 @@ class StaticPagesController < ApplicationController
 
   end
 
+  def demo4
+    if params[:start_date] && params[:end_date] != nil
+      @results = Rbandit::Trdopt.joins(:instropt).where(:ts => params[:start_date]..params[:end_date]).group('instropt.underlying').select('instropt.underlying, COUNT(*) as cnt')
+      @results.map! { |r| [r.underlying, r.cnt] }
+      @results = @results.sort_by &:last
+      @results.reverse!
+
+      @results = Kaminari.paginate_array(@results).page(params[:page]).per(20)
+
+      @results_cats = @results[0..20].map { |r| r[0] }
+      @results_dats = @results[0..20].map { |r| r[1] }
+
+    else
+      @results = nil
+    end
+  end
+
 end

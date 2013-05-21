@@ -17,7 +17,7 @@
     <%= label_tag(:group_type, "Group By", :class => 'control-label') %>
     <div class="controls">
       <%#= text_field_tag :group_type, params[:group_type], :placeholder => 'Group by...' %>
-      <%= select_tag(:group_type, options_for_select({"Indicator" => 'ind', "Exchange" => 'exchcode', "Option ID" => 'optid'}), :prompt => 'Select 1') %>
+      <%= select_tag(:group_type, options_for_select({"Indicator" => 'ind', "Exchange" => 'exchcode', "Size" => 'size', "Option ID" => 'optid'}), :prompt => 'Select 1') %>
       <br /><br />
       <%= submit_tag "Search", :class => 'btn btn-primary', :name => nil %>
     </div><!--/controls -->
