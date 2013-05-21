@@ -49,9 +49,9 @@
           </tr>
        </thead>
        <tbody>
-        <% @results.each do |record| %>
+        <% @results.each_with_index do |record, idx| %>
         <tr>
-          <td><%= record[0] %></td>
+          <td class="row_id"><%= record[0] %></td>
           <td><%= record[1] %></td>
         </tr>
         <% end %>
@@ -123,6 +123,12 @@ $(function () {
             series: [{ name: "Instruments", data: <%= raw @results_dats %>}]
         });
     });
+</script>
+
+<script>
+  $('.row_id').click(function() {
+    alert($(this).text());
+  });
 </script>
 
 <% end %>

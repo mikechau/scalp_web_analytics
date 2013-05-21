@@ -11,6 +11,8 @@ class StaticPagesController < ApplicationController
       @results = Data::Indicator.new(params[:start_date], params[:end_date], params[:group_type])
       @results.execute
 
+      @json_results = @results.table
+
       @results.table = Kaminari.paginate_array(@results.table).page(params[:page]).per(20)
 
       @results_cats = @results.table[0..5].map { |r| r[0] }
@@ -18,7 +20,7 @@ class StaticPagesController < ApplicationController
 
       respond_to do |format|
         format.html
-        format.json { render json: @indicators }
+        format.json { render json: @json_results }
       end
 
     else
@@ -45,3 +47,6 @@ class StaticPagesController < ApplicationController
   end
 
 end
+
+
+ # Rbandit::Instropt.joins(:trdopts).where("expiration >= ? AND underlying = ? AND trdopts.ts >= ? AND trdopts.ts <= ?", Date.today, "SNE", "2013-05-21 9:30:00", "2013-05-21 23:59:59").count
