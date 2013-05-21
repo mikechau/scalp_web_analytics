@@ -125,9 +125,14 @@ $(function () {
     });
 </script>
 
+<%= form_tag demo4_path, :method => 'get', :class => 'well form-horizontal' do %>
+  <%= text_field_tag :underlying, params[:underlying], :placeholder => 'Underlying...', :value => '', :class => "underlying_input" %>
+<% end %>
+
 <script>
   $('.row_id').click(function() {
-    alert($(this).text());
+    //alert($(this).text());
+    $('.underlying_input').val($(this).text());
   });
 </script>
 
