@@ -1,0 +1,81 @@
+<%= javascript_include_tag "http://code.highcharts.com/stock/highstock.js" %>
+<div class="row fluid">
+  <div class="span12">
+    <div id="container" style="height:555px"></div>
+  </div>
+</div>
+
+<script>
+    $(function(){
+      $.getJSON('http://10.0.7.208:3333/demo3.json?utf8=%E2%9C%93&start_date=2013-05-20+09%3A30%3A00&end_date=2013-05-20+23%3A59%3A59&group_type=ind', function(data) {
+
+        cats = [];
+        dats = [];
+
+        data.map(function(a) { cats.push(a[0]) });
+        data.map(function(a) { dats.push(a[1]) });
+
+        $('#container').highcharts({
+                    chart: {
+                        type: 'bar'
+                    },
+                    title: {
+                        text: 'Leading Indicators'
+                    },
+                    subtitle: {
+                        text: 'Source: Rbandits::Trdopt'
+                    },
+                    xAxis: {
+                        categories: cats,
+                        title: {
+                            text: null
+                        }
+                    },
+                    yAxis: {
+                        min: 0,
+                        title: {
+                            text: 'Total',
+                            align: 'high'
+                        },
+                        labels: {
+                            overflow: 'justify'
+                        }
+                    },
+                    plotOptions: {
+                        bar: {
+                            dataLabels: {
+                                enabled: true,
+                                style: {
+                                  color: 'black'
+                                }
+                            }
+                        },
+                        series: {
+                          //stacking: 'normal',
+                          borderWidth: 1,
+                          pointPadding: 0,
+                          groupPadding: 0
+                        }
+                    },
+                    legend: {
+                        enabled: false,
+                        layout: 'vertical',
+                        align: 'right',
+                        verticalAlign: 'top',
+                        x: -100,
+                        y: 100,
+                        floating: true,
+                        borderWidth: 1,
+                        backgroundColor: '#FFFFFF',
+                        shadow: true
+                    },
+                    credits: {
+                        enabled: false
+                    },
+                    series: [{ name: "Instruments", data: dats }]
+        });
+
+      });
+
+    });
+</script>
