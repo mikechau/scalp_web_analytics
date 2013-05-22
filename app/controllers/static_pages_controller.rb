@@ -8,7 +8,7 @@ class StaticPagesController < ApplicationController
   def demo3
     if params[:start_date] && params[:end_date] && params[:group_type] != ''
 
-      @results = Data::Indicator.new(params[:start_date], params[:end_date], params[:group_type])
+      @results = Data::Indicator.new({ :start_date => params[:start_date], :end_date => params[:end_date], :group_type => params[:group_type] })
       @results.execute
 
       @json_results = @results.table
@@ -30,6 +30,7 @@ class StaticPagesController < ApplicationController
   end
 
   def demo4
+
     if params[:start_date] && params[:end_date] != nil
       @results = Rbandit::Trdopt.joins(:instropt).where(:ts => params[:start_date]..params[:end_date]).group('instropt.underlying').select('instropt.underlying, COUNT(*) as cnt')
       @results.map! { |r| [r.underlying, r.cnt] }
@@ -46,7 +47,11 @@ class StaticPagesController < ApplicationController
     end
   end
 
+  def demo5
+    @results = Rbandit::Instropt.joins(:trdopts).where("expiration >= ? AND underlying = ? AND trdopt.ts >= ? AND trdopt.ts <= ?", Date.today, params[:underlying], "2013-05-21 9:30:00", "2013-05-21 10:00:00").count
+  end
+
 end
 
 
- # Rbandit::Instropt.joins(:trdopts).where("expiration >= ? AND underlying = ? AND trdopts.ts >= ? AND trdopts.ts <= ?", Date.today, "SNE", "2013-05-21 9:30:00", "2013-05-21 23:59:59").count
+ # a = Rbandit::Instropt.joins(:trdopts).where("expiration >= ? AND underlying = ? AND trdopt.ts >= ? AND trdopt.ts <= ?", Date.today, "SNE", "2013-05-21 9:30:00", "2013-05-21 23:59:59").count

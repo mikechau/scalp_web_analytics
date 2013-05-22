@@ -125,8 +125,9 @@
     });
 </script>
 
-<%= form_tag demo4_path, :method => 'get', :class => 'well form-horizontal' do %>
+<%= form_tag demo5_path, :method => 'get', :class => 'well form-horizontal' do %>
   <%= text_field_tag :underlying, params[:underlying], :placeholder => 'Underlying...', :value => '', :class => "underlying_input" %>
+  <%= submit_tag "Search", :class => 'btn btn-primary', :name => nil %>
 <% end %>
 
 <script>

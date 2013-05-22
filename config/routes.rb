@@ -6,6 +6,7 @@ ScalpWebAnalytics::Application.routes.draw do
   get '/demo_index', :to => 'static_pages#demo_index', as: :demo_index
   get '/demo3', :to => 'static_pages#demo3', as: :demo3
   get '/demo4', :to => 'static_pages#demo4', as: :demo4
+  get '/demo5', :to => 'static_pages#demo5', as: :demo5
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

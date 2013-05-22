@@ -3,10 +3,10 @@ class Data::Indicator
   attr_reader :cats, :dats
   attr_accessor :table
 
-  def initialize(start_date, end_date, group_type)
-    @start_date = start_date
-    @end_date = end_date
-    @group_type = group_type
+  def initialize(params = {})
+    @start_date = params[:start_date]
+    @end_date = params[:end_date]
+    @group_type = params[:group_type]
     @trd_count = []
     @trd_names = []
     #@ind_array = []
