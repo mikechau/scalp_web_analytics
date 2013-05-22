@@ -3,18 +3,14 @@
 <div class="row-fluid">
   <div class="span12">
     <hr />
-    <div class="span4">
-      <%= render 'top_underlying' %>
-    </div>
+    <%= render 'top_underlying' %>
   </div>
 </div>
 
 <div class="row-fluid">
   <div class="span12">
     <hr />
-    <h1>Top Indicators for Underlying (Global / Individual)</h1>
-    <div class="span4">
-    </div>
+    <%= render 'top_indicators' %>
   </div>
 </div>
 
@@ -35,3 +31,12 @@
     </div>
   </div>
 </div>
+
+<script>
+  $("input#underlying_name").autocomplete({
+      source: function(request, response) {
+        $.getJSON('<%=underlying_name_search_path%>?underlying_name=<%= params[:underlying_name]%>', { underlying_name: request.term }, response);
+      },
+      minLength: 1, delay: 0
+  });
+</script>

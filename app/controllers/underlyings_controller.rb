@@ -7,7 +7,7 @@ class UnderlyingsController < ApplicationController
     puts params[:underlying_name]
     u_names = Rbandit::Instropt.where("underlying LIKE :name", name: "#{params[:underlying_name]}%").uniq.pluck(:underlying)
     u_names.sort!
-    render json: u_names[0..7]
+    render json: u_names[0..4]
   end
 
   def top
@@ -21,6 +21,20 @@ class UnderlyingsController < ApplicationController
       format.html
       format.json { render json: @top }
     end
+  end
+
+  def top_indicators
+    @top = Rbandit::Trdopt.top_indicators(params[:start_date], params[:end_date], params[:underlying_name])
+    @results = Kaminari.paginate_array(@top).page(params[:page]).per(20)
+
+    @results_cats = @results[0..5].map { |r| r[0] }
+    @results_dats = @results[0..5].map { |r| r[1] }
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @top }
+    end
+
   end
 
 end

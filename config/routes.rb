@@ -9,7 +9,8 @@ ScalpWebAnalytics::Application.routes.draw do
   get '/demo5', :to => 'static_pages#demo5', as: :demo5
 
   get '/underlying', :to => 'underlyings#index', as: :underlying
-  get '/top_underlying', :to => 'underlyings#top', as: :underlying_top
+  get '/underlying/top', :to => 'underlyings#top', as: :underlying_top
+  get '/underlying/top_indicators', :to => 'underlyings#top_indicators', as: :underlying_top_indicators
 
   get '/underlying_name_search', :to => 'underlyings#search_underlying_name', as: :underlying_name_search
 
