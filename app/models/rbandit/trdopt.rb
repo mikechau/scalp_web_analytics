@@ -5,12 +5,11 @@ class Rbandit::Trdopt < Rbandit::TradeBase
   belongs_to :trdindopt, :foreign_key => :ind
   belongs_to :exchopt, :foreign_key => :exchcode
 
-  def underlying_name
-    underlying_name if underlying
-  end
-
-  def underlying_name=(name)
-    self.underlying = Rbandit::Instropt.find_by_underlying(name) unless name.blank?
+  def self.top_underlying(start_date, end_date)
+    top = self.joins(:instropt).where(:ts => start_date..end_date).group('instropt.underlying').select('instropt.underlying, COUNT(*) as cnt')
+    top.map! { |t| [t.underlying, t.cnt] }
+    top = top.sort_by &:last
+    top.reverse!
   end
 
 end

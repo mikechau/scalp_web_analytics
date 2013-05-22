@@ -1,0 +1,20 @@
+<h1>Top Global Underlying</h1>
+
+<%= form_tag underlying_top_path, :method => 'get', :class => 'well form-horizontal' do %>
+  <div class="control-group">
+    <%= label_tag(:start_date, "Start Date", :class => 'control-label') %>
+    <div class="controls">
+      <%= text_field_tag :start_date, params[:start_date], :placeholder => 'Starting Date...', :value => Time.now.strftime('%Y-%m-%d 09:30:00'), :class => "time_input" %>
+    </div><!-- /controls -->
+  </div><!--/control-group-->
+  
+  <div class="control-group">
+    <%= label_tag(:end_date, "End Date", :class => 'control-label') %>
+    <div class="controls">
+      <%= text_field_tag :end_date, params[:end_date], :placeholder => 'Ending Date...', :value => Time.now.strftime('%Y-%m-%d 23:59:59'), :class => "time_input" %>
+      <br /><br />
+      <%= submit_tag "Search", :class => 'btn btn-primary', :name => nil %>
+    </div><!-- /controls -->
+  </div><!-- /control-group -->
+
+<% end %>

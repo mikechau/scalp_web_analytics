@@ -10,4 +10,17 @@ class UnderlyingsController < ApplicationController
     render json: u_names[0..7]
   end
 
+  def top
+    @top = Rbandit::Trdopt.top_underlying(params[:start_date], params[:end_date])
+    @results = Kaminari.paginate_array(@top).page(params[:page]).per(20)
+
+    @results_cats = @results[0..20].map { |r| r[0] }
+    @results_dats = @results[0..20].map { |r| r[1] }
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @top }
+    end
+  end
+
 end

@@ -1,0 +1,63 @@
+<script>
+  $(function () {
+        $('#container').highcharts({
+            chart: {
+                type: 'bar'
+            },
+            title: {
+                text: 'Placeholder Name'
+            },
+            subtitle: {
+                text: 'Source: Rbandits::Trdopt'
+            },
+            xAxis: {
+                categories: <%= raw @results_cats %>,
+                title: {
+                    text: null
+                }
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Total',
+                    align: 'high'
+                },
+                labels: {
+                    overflow: 'justify'
+                }
+            },
+            plotOptions: {
+                bar: {
+                    dataLabels: {
+                        enabled: true,
+                        style: {
+                          color: 'black'
+                        }
+                    }
+                },
+                series: {
+                  //stacking: 'normal',
+                  borderWidth: 1,
+                  pointPadding: 0,
+                  groupPadding: 0
+                }
+            },
+            legend: {
+                enabled: false,
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top',
+                x: -100,
+                y: 100,
+                floating: true,
+                borderWidth: 1,
+                backgroundColor: '#FFFFFF',
+                shadow: true
+            },
+            credits: {
+                enabled: false
+            },
+            series: [{ name: "Instruments", data: <%= raw @results_dats %>}]
+        });
+    });
+</script>
