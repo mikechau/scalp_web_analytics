@@ -1,0 +1,183 @@
+<div class="row fluid">
+  <div class="span8">
+    <div id="container" style="height:540px"></div>
+  </div>
+
+  <div class="span4">
+    <%#= paginate @indicators %>
+      <table class="table table-striped table-hover table-condensed">
+        <thead>
+          <tr>
+            <th><%= params[:group_type] %></th>
+            <th>Total</th>
+          </tr>
+       </thead>
+       <tbody>
+        <% @indicators.table.each do |record| %>
+        <tr>
+          <td><%= record[0] %></td>
+          <td><%= record[1] %></td>
+        </tr>
+        <% end %>
+        </tbody>
+      </table>
+    <%#= page_entries_info @find_info %>
+  </div>
+</div>
+
+<%= render 'search' %>
+
+<script>
+$(function () {
+        $('#container').highcharts({
+            chart: {
+                type: 'bar'
+            },
+            title: {
+                text: 'Leading Indicators'
+            },
+            subtitle: {
+                text: 'Source: Rbandits::Trdopt'
+            },
+            xAxis: {
+                categories: <%= raw @indicators.ind_cats[0..5] %>,
+                title: {
+                    text: null
+                }
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Total',
+                    align: 'high'
+                },
+                labels: {
+                    overflow: 'justify'
+                }
+            },
+            plotOptions: {
+                bar: {
+                    dataLabels: {
+                        enabled: true,
+                        style: {
+                          color: 'black'
+                        }
+                    }
+                },
+                series: {
+                  //stacking: 'normal',
+                  borderWidth: 1,
+                  pointPadding: 0,
+                  groupPadding: 0
+                }
+            },
+            legend: {
+                enabled: false,
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top',
+                x: -100,
+                y: 100,
+                floating: true,
+                borderWidth: 1,
+                backgroundColor: '#FFFFFF',
+                shadow: true
+            },
+            credits: {
+                enabled: false
+            },
+            series: [{ name: "Instruments", data: <%= raw @indicators.ind_dats[0..5] %>}]
+        });
+    });
+</script>
+
+
+      <table class="table table-striped table-hover table-condensed">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>TS</th>
+            <th>Optid</th>
+            <th>Price</th>
+            <th>Size</th>
+          </tr>
+       </thead>
+       <tbody>
+        <% @find_info.each do |record| %>
+        <tr>
+          <td><%= record.id %></td>
+          <td><%= record.ts %></td>
+          <td><%= record.optid %></td>
+          <td><%= record.price %></td>
+          <td><%= record.size %></td>
+        </tr>
+        <% end %>
+        </tbody>
+      </table>
+
+
+      # @indicators = Rbandit::Trdopt.where(:ts => params[:start_date]..params[:end_date]).count(group: params[:group_type])
+
+      # @indicators = @indicators.sort_by &:last
+      # @indicators.reverse!
+
+      # @indicator_names = Rbandit::Trdindopt.all
+
+      # @indicator_cats = @indicators.map { |i| @indicator_names.find { |n| n.id == i[0]}.name }
+      # @indicator_data = @indicators.map { |i| i[1] }
+
+      # @indicator_array = []
+
+      # @indicator_data.each do |i|
+      #   hash = {}
+      #   hash["name"] = "Indicator"
+      #   hash["data"] = [i]
+      #   @indicator_array << hash
+      # end
+
+      # @indicators_table = @indicator_cats.zip(@indicator_data)
+
+
+[1367366400000,444.46,444.93,434.39,439.29],
+[1367452800000,441.78,448.59,440.63,445.52],
+[1367539200000,451.31,453.23,449.15,449.98],
+[1367798400000,455.71,462.20,454.31,460.71],
+[1367884800000,464.97,465.75,453.70,458.66],
+[1367971200000,459.04,465.37,455.81,463.84],
+[1368057600000,459.81,463.00,455.58,456.77],
+[1368144000000,457.97,459.71,450.48,452.97],
+[1368403200000,451.51,457.90,451.50,454.74],
+[1368489600000,453.85,455.20,442.15,443.86]
+
+1368489600000
+1368662400
+13686624000000
+1368662400
+1259222400
+"1368662400000"
+
+
+<form class="form-horizontal">
+  <div class="control-group">
+    <label class="control-label" for="inputEmail">Email</label>
+    <div class="controls">
+      <input type="text" id="inputEmail" placeholder="Email">
+    </div>
+  </div>
+  
+  <div class="control-group">
+    <label class="control-label" for="inputPassword">Password</label>
+      <div class="controls">
+        <input type="password" id="inputPassword" placeholder="Password">
+      </div>
+  </div>
+  
+  <div class="control-group">
+    <div class="controls">
+      <label class="checkbox">
+        <input type="checkbox"> Remember me
+      </label>
+      <button type="submit" class="btn">Sign in</button>
+    </div>
+  </div>
+</form>
