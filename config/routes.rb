@@ -10,6 +10,9 @@ ScalpWebAnalytics::Application.routes.draw do
 
   get '/underlying', :to => 'underlyings#index', as: :underlying
   get '/top_underlying', :to => 'underlyings#top', as: :underlying_top
+
+  get '/underlying_name_search', :to => 'underlyings#search_underlying_name', as: :underlying_name_search
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

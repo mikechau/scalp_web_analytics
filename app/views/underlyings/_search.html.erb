@@ -14,11 +14,28 @@
   </div><!-- /control-group -->
 
   <div class="control-group">
-    <%= label_tag(:underlying_name, "Select", :class => 'control-label') %>
+    <%= label_tag(:select_underlying, "Underlying Ticker", :class => 'control-label') %>
     <div class="controls">
-      <%= text_field_tag(:underlying_name) %>
+      <%= search_field_tag :underlying_name, params[:underlying_name] %>
+      <label class="checkbox">
+        <%= check_box_tag :underlying_name, 'get_everything', false %> Select All
+      </label>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <div class="controls">
       <br /><br />
       <%= submit_tag "Search", :class => 'btn btn-primary', :name => nil %>
     </div><!--/controls -->
   </div><!-- /control-group -->
 <% end %>
+
+<script>
+  $("input#underlying_name").autocomplete({
+      source: function(request, response) {
+        $.getJSON('<%=underlying_name_search_path%>?underlying_name=<%= params[:underlying_name]%>', { underlying_name: request.term }, response);
+      },
+      minLength: 1, delay: 0
+  });
+</script>
