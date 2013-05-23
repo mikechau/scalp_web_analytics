@@ -11,6 +11,7 @@ ScalpWebAnalytics::Application.routes.draw do
   get '/underlying', :to => 'underlyings#index', as: :underlying
   get '/underlying/top', :to => 'underlyings#top', as: :underlying_top
   get '/underlying/top_indicators', :to => 'underlyings#top_indicators', as: :underlying_top_indicators
+  get '/underlying/top_volume', :to => 'underlyings#top_volume', as: :underlying_top_volume
 
   get '/underlying_name_search', :to => 'underlyings#search_underlying_name', as: :underlying_name_search
 

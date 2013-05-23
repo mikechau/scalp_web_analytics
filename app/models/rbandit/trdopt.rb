@@ -13,7 +13,7 @@ class Rbandit::Trdopt < Rbandit::TradeBase
   end
 
   def self.top_indicators(start_date, end_date, underlying_name)
-    if underlying_name == 'get_everything'
+    if underlying_name == ''
       top = self.where(:ts => start_date..end_date).group('trdopt.ind').select('trdopt.ind, COUNT(*) as cnt')
     else
       top = self.joins(:instropt).where("ts >= ? AND ts <= ? AND instropt.underlying = ?", start_date, end_date, underlying_name).group('trdopt.ind').select('trdopt.ind, COUNT(*) as cnt')

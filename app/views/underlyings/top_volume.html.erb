@@ -1,0 +1,39 @@
+<%= javascript_include_tag "http://code.highcharts.com/stock/highstock.js" %>
+
+<div class="row fluid">
+  <div class="span8">
+    <div id="container" style="height:555px"></div>
+  </div>
+
+  <div class="span4">
+    <table class="table table-striped table-hover table-condensed">
+      <thead>
+        <tr>
+          <th>Underlying</th>
+          <th>Expiration</th>
+          <th>Strike</th>
+          <th>Option</th>
+          <th>Volume</th>
+        </tr>
+     </thead>
+     <tbody>
+        <% @results.each_with_index do |record, idx| %>
+          <tr>
+            <td class="row_id"><%= record[:underlying] %></td>
+            <td><%= record[:expiration] %></td>
+            <td><%= record[:strike] %></td>
+            <td><%= record[:option] %></td>
+            <td><%= record[:volume] %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="span4">
+    <%= paginate @results %>
+    <%= page_entries_info @results %>
+  </div>
+</div>
+
+<%= render 'horizon_bar_graph' %>

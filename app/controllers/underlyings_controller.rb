@@ -34,7 +34,20 @@ class UnderlyingsController < ApplicationController
       format.html
       format.json { render json: @top }
     end
+  end
 
+  def top_volume
+    @top = Rbandit::Trdstatsopt.top_volume(params[:start_date], params[:end_date], params[:underlying_name], params[:limit_amt])
+
+    @results = Kaminari.paginate_array(@top).page(params[:page]).per(20)
+
+    @results_cats = @results[0..9].map { |r| "[#{r[:underlying]}] - #{r[:expiration]} - #{r[:strike]}, #{r[:option]}" }
+    @results_dats = @results[0..9].map { |r| r[:volume] }
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @top }
+    end
   end
 
 end
