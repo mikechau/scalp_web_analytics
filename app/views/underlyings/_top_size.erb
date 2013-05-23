@@ -1,0 +1,39 @@
+<h1>Top Instruments by Size (Global / Individual)</h1>
+
+<div class="span4">
+  <%= form_tag underlying_top_size_path, :method => 'get', :class => 'well form-horizontal' do %>
+    <div class="control-group">
+      <%= label_tag(:start_date, "Start Date", :class => 'control-label') %>
+      <div class="controls">
+        <%= text_field_tag :start_date, params[:start_date], :placeholder => 'Starting Date...', :value => Time.now.strftime('%Y-%m-%d 09:30:00'), :id => "time_input_start" %>
+      </div><!-- /controls -->
+    </div><!--/control-group-->
+
+    <div class="control-group">
+      <%= label_tag(:end_date, "End Date", :class => 'control-label') %>
+      <div class="controls">
+        <%= text_field_tag :end_date, params[:end_date], :placeholder => 'Ending Date...', :value => Time.now.strftime('%Y-%m-%d 23:59:59'), :id => "time_input_end" %>
+      </div><!-- /controls -->
+    </div><!-- /control-group -->
+
+    <div class="control-group">
+      <%= label_tag(:select_underlying, "Underlying Ticker", :class => 'control-label') %>
+      <div class="controls">
+        <%= search_field_tag :underlying_name, params[:underlying_name] %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= label_tag(:limit_amt, "Limit Results", :class => 'control-label') %>
+      <div class="controls">
+        <%= select_tag(:limit_amt, options_for_select({ "15" => 15, "25" => 25, "50" => 50, "100" => 100, "1000" => 1000, "1500" => 1500 }, "15")) %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <div class="controls">
+        <%= submit_tag "Search", :class => 'btn btn-primary', :name => nil %>
+      </div><!--/controls -->
+    </div><!-- /control-group -->
+  <% end %>
+</div>

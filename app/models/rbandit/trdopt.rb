@@ -23,4 +23,14 @@ class Rbandit::Trdopt < Rbandit::TradeBase
     top = top.sort_by &:last
     top.reverse!
   end
+
+  def self.top_size(start_date, end_date, underlying_name, limit_amt)
+    if underlying_name == ''
+      top = self.joins(:instropt).where(:ts => start_date..end_date).select('size, instropt.underlying, instropt.expiration, instropt.strike, instropt.callput').order('size DESC').limit(limit_amt)
+    else
+      top = self.joins(:instropt).where('ts >= ? AND ts <= ? AND instropt.underlying = ?', start_date, end_date, underlying_name).select('size, instropt.underlying, instropt.expiration, instropt.strike, instropt.callput').order('size DESC')
+    end
+
+    top.map! { |t| {:underlying => t.underlying, :expiration => t.expiration, :strike => t.strike, :option => t.callput, :size => t.size } }
+  end
 end
