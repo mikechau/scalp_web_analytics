@@ -18,6 +18,9 @@ ScalpWebAnalytics::Application.routes.draw do
 
   get '/underlying_name_search', :to => 'underlyings#search_underlying_name', as: :underlying_name_search
 
+  devise_for :users, controllers: { omniauth_callbacks: "omniauth_callbacks" }
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
