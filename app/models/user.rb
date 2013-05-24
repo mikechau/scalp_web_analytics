@@ -21,6 +21,7 @@ class User < ActiveRecord::Base
         user.username = auth.info.name
         user.email = auth.info.email
         user.avatar = auth.info.image
+        user
       end
     end
   end

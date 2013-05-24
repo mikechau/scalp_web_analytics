@@ -4,8 +4,8 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :email, :required => true, :autofocus => true %>
-    <%= f.input :password, :required => true %>
+    <%= f.input :email, :required => true, :autofocus => (true if session["devise.user_attributes"].nil?), :input_html => { :value => (session["devise.user_attributes"]["email"] unless session["devise.user_attributes"].nil?) } %>
+    <%= f.input :password, :autofocus => (true unless session["devise.user_attributes"].nil?), :required => true %>
     <%= f.input :password_confirmation, :required => true %>
   </div>
 
