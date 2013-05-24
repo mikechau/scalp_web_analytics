@@ -1,0 +1,10 @@
+<%= simple_form_for(:user, :url => new_user_session_path(@user)) do |f| %>
+    <span class="nav_login_text">
+    <%= f.input :email, :required => false, :autofocus => true, :placeholder => 'email address', :label => false %>
+    <%= f.input :password, :required => false, :placeholder => 'password', :label => false %>
+    <%= f.input :remember_me, :as => :boolean if devise_mapping.rememberable? %>
+    <%= f.button :submit, "Sign in" %>
+    </span>
+<% end %>
+
+<%= render "devise/shared/links2" %>

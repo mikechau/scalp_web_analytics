@@ -21,7 +21,6 @@ body {
   padding-bottom: 40px;
 }
 
-
 /* Overrides */
 
 .table-hover tbody tr:hover > td, .table-hover tbody tr:hover {
@@ -29,6 +28,24 @@ body {
 }
 
 .navigation_bar {
+}
+
+.dropdown > ul > li {
+  padding: 15px 20px;
+}
+
+.dropdown-menu > li > a {
+  color: black;
+}
+
+.dropdown-bg {
+  padding-top: 35px;
+  background-image: #999999;
+}
+
+.nav_login_text {
+  color: gray;
+  font-weight: bold;
 }
 
 @media (max-width: 979px) {
