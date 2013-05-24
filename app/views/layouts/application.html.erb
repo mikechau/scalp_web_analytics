@@ -17,8 +17,17 @@
       </button>
       <%= link_to "ANALYTICS", '#', id: "logo" %>
       <div class="nav-collapse collapse">
-        <p class="navbar-text pull-right">
-          Logged in as #user.
+        <p class="navbar-text pull-right login">
+          <% if !current_user %>
+            <%= link_to "Login", new_user_session_path %> | 
+            <%= link_to "Register", new_user_registration_path %> | 
+            <%= link_to "Google Login", user_omniauth_authorize_path(:google_oauth2) %>
+          <% else %>
+            <%= current_user.email %>
+            <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+          <% end %>
+          <p class="notice"><%= notice %></p>
+          <p class="alert"><%= alert %></p>
         </p>
         <ul class="nav">
           <li><%= link_to "Home", root_path, id: "active" %></li>
