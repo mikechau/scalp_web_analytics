@@ -50,3 +50,4 @@ gem 'rufus-scheduler'
 gem 'kaminari'
 gem 'simple_form'
 gem 'rails3-jquery-autocomplete'
+gem "figaro"
