@@ -51,3 +51,5 @@ gem 'kaminari'
 gem 'simple_form'
 gem 'rails3-jquery-autocomplete'
 gem "figaro"
+gem 'devise'
+gem 'omniauth-google-oauth2'
