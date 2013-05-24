@@ -1,5 +1,5 @@
 jQuery ->
-  $("#time_input_start, #time_input_end, #time_input_start2, #time_input_end2").datetimepicker
+  $("#time_input_start, #time_input_end, #time_input_start2, #time_input_end2, #time_input_start4, #time_input_end4").datetimepicker
     controlType: "select"
     dateFormat: "yy-mm-dd"
     timeFormat: "HH:mm:ss"
