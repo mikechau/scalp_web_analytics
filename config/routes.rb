@@ -1,5 +1,7 @@
 ScalpWebAnalytics::Application.routes.draw do
 
+  devise_for :users
+
   root :to => 'static_pages#index'
   get '/demo', :to => 'static_pages#demo', as: :demo
   get '/demo2', :to => 'static_pages#demo2', as: :demo2
